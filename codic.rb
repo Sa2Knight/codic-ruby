@@ -10,13 +10,12 @@ class Codic
   # CodicAPIのキーで生成 指定がない場合環境変数を参照する
   def initialize(api_key = nil)
     @api_key = api_key || ENV['CODICAPI']
-    request(@@API_URL, {:text => '認証'})
   end
 
   # 翻訳する
   # 指定した日本語に基いて、Codicを用いて翻訳した結果を戻す
-  def translate(text)
-    result = request(@@API_URL, {:text => text})
+  def translate(text, casing = '')
+    result = request(@@API_URL, {:text => text, :casing => casing})
     result[0]["translated_text"] if result.count > 0 && result[0].include?("translated_text")
   end
 
