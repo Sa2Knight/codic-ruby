@@ -1,0 +1,3 @@
+class Codic
+
+end
