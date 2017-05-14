@@ -1,0 +1,47 @@
+#!/bin/bash
+SCRIPTPATH="/home/vagrant/codicRuby/codic.rb"
+
+# ヘルプ
+usage() {
+  echo "Codic APIに基いて日本語の翻訳を行う"
+  echo "  Usage: codic text [-c] [-p] [-l] [-u] [-h] [-n]"
+  echo "オプション:"
+  echo "  -c キャメルケースで取得(getData)"
+  echo "  -p パスカルケースで取得(GetData)"
+  echo "  -l 小文字のスネークケースで取得(get_data)"
+  echo "  -u 大文字のスネークケースで取得(GET_DATA)"
+  echo "  -h ハイフン刻みで取得(get-data)"
+  echo "  -n スペース刻みで取得(get data)"
+  exit 1
+}
+
+if [ -n "$1" ]; then
+  text=$1
+  shift 1
+else
+  usage
+  exit 1
+fi
+
+# オプション解析
+casing="c" #デフォルト設定をここに記述
+while getopts cpluhn: OPT
+do
+  case $OPT in
+  c)  casing="c"
+      ;;
+  p)  casing="p"
+      ;;
+  l)  casing="l"
+      ;;
+  u)  casing="u"
+      ;;
+  h)  casing="h"
+      ;;
+  n)  casing="n"
+      ;;
+  esac
+done
+
+command="$SCRIPTPATH $text $casing"
+ruby $command
