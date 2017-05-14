@@ -28,7 +28,6 @@ class Codic
         'l' => 'lower underscore',
         'u' => 'upper underscore',
         'h' => 'hyphen',
-        'n' => ''
       }
       new_casing = casingList[casing]
       new_casing ? new_casing : ''
